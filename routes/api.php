@@ -1,7 +1,15 @@
 <?php
 
 use App\Http\Controllers\Auth;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
+/**
+ * Me Routes
+ */
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('me', UserController::class);
+});
 
 /**
  * Auth Routes

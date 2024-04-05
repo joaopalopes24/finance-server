@@ -7,7 +7,6 @@ use App\Http\Requests\Auth\RegisteredUserRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class RegisteredUserController extends Controller
 {
