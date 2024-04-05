@@ -15,8 +15,8 @@ class AdminSeeder extends Seeder
         $admin = config('system.admin');
 
         $user = User::firstOrNew([
-            'email' => $admin['email']
-        ],[
+            'email' => $admin['email'],
+        ], [
             'name' => $admin['name'],
             'password' => $admin['password'],
         ]);
