@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Event;
 test('it should successfully register the new user', function () {
     Event::fake();
 
-    $password = fake()->password();
+    $password = fake()->password(minLength: 12);
 
     $response = $this->postJson('/api/register', [
         'name' => fake()->name(),
