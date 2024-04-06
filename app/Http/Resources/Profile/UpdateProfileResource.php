@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Profile;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MeResource extends JsonResource
+class UpdateProfileResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -28,6 +28,6 @@ class MeResource extends JsonResource
      */
     public function with(Request $request): array
     {
-        return ['message' => trans('messages.me')];
+        return ['message' => trans('messages.profile.update_profile')];
     }
 }

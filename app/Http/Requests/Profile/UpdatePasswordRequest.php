@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Profile;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
-class RegisteredUserRequest extends FormRequest
+class UpdatePasswordRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,23 +13,17 @@ class RegisteredUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
+            'current_password' => [
                 'required',
                 'string',
-                'max:255',
-            ],
-            'email' => [
-                'required',
-                'string',
-                'max:255',
-                'email',
-                Rule::unique(User::class, 'email'),
+                'current_password',
             ],
             'password' => [
                 'required',
                 'string',
-                'max:255',
+                'min:8',
                 'confirmed',
+                'different:current_password',
                 Password::defaults(),
             ],
         ];

@@ -39,4 +39,28 @@ return [
 
         'destroy' => 'Transaction deleted successfully.',
     ],
+
+    'profile' => [
+        'changed_email' => 'We have sent an email to confirm the new email address.',
+
+        'update_profile' => 'Profile updated successfully.',
+
+        'update_password' => 'Password updated successfully.',
+
+        'destroy_user' => 'Account deleted successfully.',
+
+        'destroy_browser_sessions' => 'Browser sessions deleted successfully.',
+    ],
+
+    'two_factor' => [
+        'invalid_code' => 'The two factor code is invalid.',
+
+        'enabled' => 'Two factor authentication has been enabled.',
+
+        'confirmed' => 'Two factor authentication has been confirmed.',
+
+        'destroy' => 'Two factor authentication has been disabled.',
+
+        'new_recovery_codes' => 'New recovery codes have been generated.',
+    ],
 ];

@@ -19,6 +19,16 @@ abstract class TestCase extends BaseTestCase
     protected bool $seed = true;
 
     /**
+     * Set up the test.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withHeaders(['Origin' => config('app.frontend_url')]);
+    }
+
+    /**
      * Create a access token for the user.
      */
     public function createToken(User $user): NewAccessToken

@@ -19,7 +19,7 @@ test('it should return the authenticated user', function () {
         $json->has('data', function (AssertableJson $json) {
             $json->where('id', $this->user->id);
 
-            $json->hasAll(['id', 'name', 'email', 'email_verified_at', 'created_at', 'updated_at']);
+            $json->hasAll(['id', 'name', 'email', 'email_verified_at', 'has_two_factor', 'created_at', 'updated_at']);
         })->has('message');
     });
 });

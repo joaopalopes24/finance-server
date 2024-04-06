@@ -16,14 +16,6 @@ trait ApiResponse
     }
 
     /**
-     * Status 204
-     */
-    public function noContent(mixed $message = null, mixed $data = null): JsonResponse
-    {
-        return $this->genericResponse($data, $message, Response::HTTP_NO_CONTENT);
-    }
-
-    /**
      * Status 302
      */
     public function found(mixed $message = null, mixed $data = null): JsonResponse
