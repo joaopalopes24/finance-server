@@ -14,6 +14,11 @@ abstract class TestCase extends BaseTestCase
     use RefreshDatabase;
 
     /**
+     * Seed the database before each test.
+     */
+    protected bool $seed = true;
+
+    /**
      * Create a access token for the user.
      */
     public function createToken(User $user): NewAccessToken
