@@ -2,17 +2,18 @@
 
 namespace Database\Factories;
 
+use App\Models\AccountPlan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\AccountPlan>
- */
 class AccountPlanFactory extends Factory
 {
     /**
+     * The name of the factory's corresponding model.
+     */
+    protected $model = AccountPlan::class;
+
+    /**
      * Define the model's default state.
-     *
-     * @return array<string, mixed>
      */
     public function definition(): array
     {

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserResource;
+use App\Http\Resources\MeResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class MeController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,6 +15,6 @@ class UserController extends Controller
     {
         $user = $request->user();
 
-        return UserResource::make($user)->response();
+        return MeResource::make($user)->response();
     }
 }
