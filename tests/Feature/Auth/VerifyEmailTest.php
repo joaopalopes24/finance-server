@@ -17,16 +17,16 @@ test('it should verify email successfully', function () {
         ['id' => $user->id, 'hash' => sha1($user->email)]
     );
 
-    $response = $this->getJson($verificationUrl);
+    $response = $this->actingAs($user)->get($verificationUrl);
 
     Event::assertDispatched(Verified::class);
 
-    expect($user->fresh()->hasVerifiedEmail())->toBeTrue();
+    expect($user->refresh()->hasVerifiedEmail())->toBeTrue();
 
     $response->assertRedirect(frontend('/dashboard?verified=1'));
 
     // Trying to verify again
-    $response = $this->getJson($verificationUrl);
+    $response = $this->actingAs($user)->get($verificationUrl);
 
     $response->assertRedirect(frontend('/dashboard?verified=1'));
 });
@@ -40,9 +40,9 @@ test('it should not check email with invalid hash', function () {
         ['id' => $user->id, 'hash' => sha1('wrong-email')]
     );
 
-    $this->getJson($verificationUrl)->assertForbidden();
+    $this->actingAs($user)->get($verificationUrl)->assertForbidden();
 
-    expect($user->fresh()->hasVerifiedEmail())->toBeFalse();
+    expect($user->refresh()->hasVerifiedEmail())->toBeFalse();
 });
 
 test('it should not check email with invalid user id', function () {
@@ -54,7 +54,7 @@ test('it should not check email with invalid user id', function () {
         ['id' => fake()->randomNumber(5, true), 'hash' => sha1($user->email)]
     );
 
-    $this->getJson($verificationUrl)->assertForbidden();
+    $this->actingAs($user)->get($verificationUrl)->assertForbidden();
 
-    expect($user->fresh()->hasVerifiedEmail())->toBeFalse();
+    expect($user->refresh()->hasVerifiedEmail())->toBeFalse();
 });

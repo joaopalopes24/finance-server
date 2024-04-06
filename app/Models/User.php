@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasTwoFactor;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,6 +13,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
+    use HasTwoFactor;
     use Notifiable;
 
     /**
@@ -25,6 +27,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
     ];
 
     /**
@@ -35,6 +39,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'password' => 'hashed',
             'email_verified_at' => 'datetime',
+            'two_factor_confirmed_at' => 'datetime',
         ];
     }
 }

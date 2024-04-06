@@ -7,30 +7,25 @@ use Illuminate\Support\Facades\Event;
 test('it should authenticate users successfully', function () {
     $user = User::factory()->create();
 
-    $response = $this->postJson('/api/login', [
+    $response = $this->postJson('/login', [
         'email' => $user->email,
         'password' => 'password',
     ]);
 
-    $accessToken = $this->getPersonalAccessToken($response->json('data.token'));
+    $this->assertAuthenticated();
 
-    $this->assertModelExists($accessToken);
-
-    $response
-        ->assertOk()
-        ->assertMessage(trans('auth.login'))
-        ->assertJsonStructure(['message', 'data' => ['token']]);
+    $response->assertOk()->assertMessage(trans('auth.login'));
 });
 
 test('it should block authenticate because the password is invalid', function () {
     $user = User::factory()->create();
 
-    $response = $this->postJson('/api/login', [
+    $response = $this->postJson('/login', [
         'email' => $user->email,
         'password' => fake()->password(10),
     ]);
 
-    $this->assertGuest('sanctum');
+    $this->assertGuest();
 
     $response->assertUnprocessable()->assertInvalid(['email']);
 });
@@ -38,15 +33,9 @@ test('it should block authenticate because the password is invalid', function ()
 test('it should logout user successfully', function () {
     $user = User::factory()->create();
 
-    $token = $this->createToken($user);
+    $response = $this->actingAs($user)->deleteJson('/logout');
 
-    $this->assertModelExists($token->accessToken);
-
-    $response = $this->withHeaders([
-        'Authorization' => "Bearer {$token->plainTextToken}",
-    ])->deleteJson('/api/logout');
-
-    $this->assertModelMissing($token->accessToken);
+    $this->assertGuest();
 
     $response->assertOk()->assertMessage(trans('auth.logout'));
 });
@@ -57,7 +46,7 @@ test('it should block authenticate because of the too many requests', function (
     $user = User::factory()->create();
 
     collect()->range(1, 5)->each(function () use ($user) {
-        $response = $this->postJson('/api/login', [
+        $response = $this->postJson('/login', [
             'email' => $user->email,
             'password' => fake()->password(10),
         ]);
@@ -67,7 +56,7 @@ test('it should block authenticate because of the too many requests', function (
         $response->assertInvalid(['email' => trans('auth.failed')]);
     });
 
-    $response = $this->postJson('/api/login', [
+    $response = $this->postJson('/login', [
         'email' => $user->email,
         'password' => fake()->password(10),
     ]);
@@ -75,4 +64,17 @@ test('it should block authenticate because of the too many requests', function (
     $response->assertInvalid(['email']);
 
     Event::assertDispatched(Lockout::class);
+});
+
+test('it should redirect user to two factor challenge', function () {
+    $user = User::factory()->twoFactor()->create();
+
+    $response = $this->postJson('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $this->assertGuest();
+
+    $response->assertFound()->assertMessage(trans('auth.require_two_factor'));
 });

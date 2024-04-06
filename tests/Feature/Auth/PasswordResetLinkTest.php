@@ -13,7 +13,7 @@ test('it should send to user the link to reset your password', function () {
 
     $user = User::factory()->create();
 
-    $this->postJson('/api/forgot-password', ['email' => $user->email]);
+    $this->postJson('/forgot-password', ['email' => $user->email]);
 
     Notification::assertSentTo($user, ResetPassword::class);
 });
@@ -23,7 +23,7 @@ test('it should render reset password page using link', function () {
 
     $user = User::factory()->create();
 
-    $this->postJson('/api/forgot-password', ['email' => $user->email]);
+    $this->postJson('/forgot-password', ['email' => $user->email]);
 
     Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
         $token = $notification->token;
@@ -47,7 +47,7 @@ test('it should return throttled email request error', function () {
         'created_at' => Carbon::now(),
     ]);
 
-    $response = $this->postJson('/api/forgot-password', [
+    $response = $this->postJson('/forgot-password', [
         'email' => $user->email,
     ]);
 

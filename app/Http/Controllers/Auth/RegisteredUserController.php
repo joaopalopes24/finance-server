@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\RegisteredUserRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class RegisteredUserController extends Controller
 {
@@ -19,8 +20,8 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        $token = $user->createToken('api-token');
+        Auth::guard('web')->login($user);
 
-        return $this->ok(trans('auth.register'), ['token' => $token->plainTextToken]);
+        return $this->ok(trans('auth.register'));
     }
 }

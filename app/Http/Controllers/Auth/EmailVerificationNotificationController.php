@@ -4,17 +4,19 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class EmailVerificationNotificationController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(Request $request): RedirectResponse|JsonResponse
     {
-        abort_if($request->user()->hasVerifiedEmail(), Response::HTTP_FORBIDDEN, trans('auth.already_verified'));
+        if ($request->user()->hasVerifiedEmail()) {
+            return redirect()->intended(frontend('/dashboard'));
+        }
 
         $request->user()->sendEmailVerificationNotification();
 

@@ -3,16 +3,13 @@
 use App\Models\User;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\Notification;
-use Laravel\Sanctum\Sanctum;
 
 test('it should redirect to home because user already is verified', function () {
     $user = User::factory()->create();
 
-    Sanctum::actingAs($user);
+    $response = $this->actingAs($user)->postJson('/email/new-notification');
 
-    $response = $this->postJson('/api/email/new-notification');
-
-    $response->assertForbidden()->assertMessage(trans('auth.already_verified'));
+    $response->assertRedirect(frontend('/dashboard'));
 });
 
 test('it should send new email when requesting by user', function () {
@@ -20,9 +17,7 @@ test('it should send new email when requesting by user', function () {
 
     $user = User::factory()->unverified()->create();
 
-    Sanctum::actingAs($user);
-
-    $response = $this->postJson('/api/email/new-notification');
+    $response = $this->actingAs($user)->postJson('/email/new-notification');
 
     Notification::assertSentTo([$user], VerifyEmail::class);
 

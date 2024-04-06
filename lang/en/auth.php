@@ -20,6 +20,13 @@ return [
     'login' => 'You have successfully logged in.',
     'logout' => 'You have successfully logged out.',
     'register' => 'You have successfully registered.',
+    'invalid_code' => 'The two factor code is invalid.',
+    'invalid_recovery' => 'The recovery code is invalid.',
+    'confirmable_password' => 'Your password has been confirmed.',
     'already_verified' => 'Your email address has already been verified.',
+    'confirmed_status' => 'Check the status of your password confirmation.',
+    'two_factor' => 'You have successfully logged in with two factor authentication.',
     'send_notification' => 'A new email verification link has been sent to your email address.',
+    'require_two_factor' => 'Two factor authentication is required to access this application.',
+
 ];

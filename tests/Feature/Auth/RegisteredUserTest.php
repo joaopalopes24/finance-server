@@ -6,23 +6,18 @@ use Illuminate\Support\Facades\Event;
 test('it should successfully register the new user', function () {
     Event::fake();
 
-    $password = fake()->password(minLength: 12);
+    $password = fake()->password(12);
 
-    $response = $this->postJson('/api/register', [
+    $response = $this->postJson('/register', [
         'name' => fake()->name(),
         'email' => fake()->email(),
         'password' => $password,
         'password_confirmation' => $password,
     ]);
 
+    $this->assertAuthenticated();
+
     Event::assertDispatched(Registered::class);
 
-    $accessToken = $this->getPersonalAccessToken($response->json('data.token'));
-
-    $this->assertModelExists($accessToken);
-
-    $response
-        ->assertOk()
-        ->assertMessage(trans('auth.register'))
-        ->assertJsonStructure(['message', 'data' => ['token']]);
+    $response->assertOk()->assertMessage(trans('auth.register'));
 });

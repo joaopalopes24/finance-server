@@ -44,5 +44,7 @@ test('it should block the creation of a new account plan with the same name', fu
         'status' => $accountPlan->status,
     ]);
 
-    $response->assertUnprocessable()->assertInvalid(['name' => trans('validation.unique')]);
+    $response->assertUnprocessable()->assertInvalid([
+        'name' => trans('validation.unique', ['attribute' => 'name']),
+    ]);
 });

@@ -50,5 +50,7 @@ test('it should block the update this account plan with other account plan name'
         'status' => $accountPlan->status,
     ]);
 
-    $response->assertUnprocessable()->assertInvalid(['name' => trans('validation.unique')]);
+    $response->assertUnprocessable()->assertInvalid([
+        'name' => trans('validation.unique', ['attribute' => 'name']),
+    ]);
 });
