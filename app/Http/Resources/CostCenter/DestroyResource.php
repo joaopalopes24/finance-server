@@ -14,4 +14,12 @@ class DestroyResource extends JsonResource
     {
         return parent::toArray($request);
     }
+
+    /**
+     * Get any additional data that should be returned with the resource array.
+     */
+    public function with(Request $request): array
+    {
+        return ['message' => trans('messages.cost_center.destroy')];
+    }
 }

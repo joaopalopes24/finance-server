@@ -18,7 +18,8 @@ class AccountPlanFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->unique()->name(),
+            'status' => $this->faker->boolean(),
         ];
     }
 }

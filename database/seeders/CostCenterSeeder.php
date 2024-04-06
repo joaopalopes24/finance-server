@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CostCenter;
 use Illuminate\Database\Seeder;
 
 class CostCenterSeeder extends Seeder
@@ -11,6 +12,6 @@ class CostCenterSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        CostCenter::factory()->count(10)->create();
     }
 }

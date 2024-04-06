@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AccountPlan;
 use Illuminate\Database\Seeder;
 
 class AccountPlanSeeder extends Seeder
@@ -11,6 +12,6 @@ class AccountPlanSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        AccountPlan::factory()->count(10)->create();
     }
 }
