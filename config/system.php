@@ -9,11 +9,11 @@ return [
     */
 
     'admin' => [
-        'name' => 'Admin',
+        'name' => env('ADMIN_NAME'),
 
-        'password' => 'password',
+        'email' => env('ADMIN_EMAIL'),
 
-        'email' => 'sunset@example.com',
+        'password' => env('ADMIN_PASSWORD'),
     ],
 
 ];

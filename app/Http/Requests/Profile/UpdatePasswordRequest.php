@@ -23,8 +23,8 @@ class UpdatePasswordRequest extends FormRequest
                 'string',
                 'min:8',
                 'confirmed',
-                'different:current_password',
                 Password::defaults(),
+                'different:current_password',
             ],
         ];
     }

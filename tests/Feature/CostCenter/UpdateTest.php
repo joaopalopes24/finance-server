@@ -50,7 +50,5 @@ test('it should block the update this cost center with other cost center name', 
         'status' => $costCenter->status,
     ]);
 
-    $response->assertUnprocessable()->assertInvalid([
-        'name' => trans('validation.unique', ['attribute' => 'name']),
-    ]);
+    $response->assertUnprocessable()->assertInvalid(['name' => trans('validation.unique')]);
 });

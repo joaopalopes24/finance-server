@@ -44,7 +44,5 @@ test('it should block the creation of a new cost center with the same name', fun
         'status' => $accountPlan->status,
     ]);
 
-    $response->assertUnprocessable()->assertInvalid([
-        'name' => trans('validation.unique', ['attribute' => 'name']),
-    ]);
+    $response->assertUnprocessable()->assertInvalid(['name' => trans('validation.unique')]);
 });
