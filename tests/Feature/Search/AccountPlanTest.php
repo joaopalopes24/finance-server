@@ -13,10 +13,10 @@ beforeEach(function () {
 test('it should return a list of account plans', function () {
     $response = $this->getJson('/api/search/account-plans');
 
-    $response->assertJsonCount(10, 'data');
+    $response->assertJsonCount(4, 'data');
 
     $response->assertJson(function (AssertableJson $json) {
-        $json->has('data', 10, function (AssertableJson $json) {
+        $json->has('data', 4, function (AssertableJson $json) {
             $json->hasAll(['id', 'name']);
         });
     });

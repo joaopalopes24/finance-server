@@ -12,6 +12,6 @@ class AccountPlanSeeder extends Seeder
      */
     public function run(): void
     {
-        AccountPlan::factory()->count(10)->create();
+        AccountPlan::factory()->count(4)->create();
     }
 }

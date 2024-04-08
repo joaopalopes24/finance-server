@@ -13,6 +13,7 @@
             <directory>app</directory>
         </include>
         <exclude>
+            <directory>app/Enum</directory>
             <directory>app/Models</directory>
         </exclude>
     </source>

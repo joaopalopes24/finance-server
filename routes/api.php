@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountPlan;
 use App\Http\Controllers\CostCenter;
+use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\MeController;
 use App\Http\Controllers\Profile;
 use App\Http\Controllers\Search;
@@ -9,11 +10,18 @@ use App\Http\Controllers\Transaction;
 use App\Http\Controllers\TwoFactor;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/dashboard', Dashboard\IndexController::class);
+
 Route::middleware('auth:sanctum')->group(function () {
     /**
      * Me Routes
      */
     Route::get('me', MeController::class);
+
+    /**
+     * Dashboard Routes
+     */
+    // Route::get('/dashboard', Dashboard\IndexController::class);
 
     /**
      * Profile
