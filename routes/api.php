@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountPlan;
 use App\Http\Controllers\CostCenter;
 use App\Http\Controllers\MeController;
 use App\Http\Controllers\Profile;
+use App\Http\Controllers\Search;
 use App\Http\Controllers\Transaction;
 use App\Http\Controllers\TwoFactor;
 use Illuminate\Support\Facades\Route;
@@ -87,5 +88,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/{transaction}', Transaction\UpdateController::class);
 
         Route::delete('/{transaction}', Transaction\DestroyController::class);
+    });
+
+    /**
+     * Search Routes
+     */
+    Route::prefix('/search')->middleware('verified')->group(function () {
+        Route::get('/account-plans', Search\AccountPlanController::class);
+
+        Route::get('/cost-centers', Search\CostCenterController::class);
     });
 });

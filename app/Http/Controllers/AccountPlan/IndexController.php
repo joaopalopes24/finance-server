@@ -28,8 +28,7 @@ class IndexController extends Controller
     {
         [$sort, $field, $search] = $request->values();
 
-        return AccountPlan::query()
-            ->search($search)
+        return AccountPlan::search($search)
             ->orderBy($field, $sort)
             ->paginate(limit());
     }

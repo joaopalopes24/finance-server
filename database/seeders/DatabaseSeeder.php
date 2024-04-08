@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             CostCenterSeeder::class,
             AccountPlanSeeder::class,
+            TransactionSeeder::class,
         ]);
     }
 }

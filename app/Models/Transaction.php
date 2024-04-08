@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enum\OperationEnum;
 use App\Enum\StatusEnum;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -41,5 +42,15 @@ class Transaction extends Model
     public function accountPlan(): BelongsTo
     {
         return $this->belongsTo(AccountPlan::class);
+    }
+
+    /**
+     * Scope a query to search transactions.
+     */
+    public function scopeSearch(Builder $query, mixed $search)
+    {
+        return $query->when($search, function ($query, $search) {
+            return $query->where('description', 'like', "%$search%");
+        });
     }
 }

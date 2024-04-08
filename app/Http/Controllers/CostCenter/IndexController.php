@@ -28,8 +28,7 @@ class IndexController extends Controller
     {
         [$sort, $field, $search] = $request->values();
 
-        return CostCenter::query()
-            ->search($search)
+        return CostCenter::search($search)
             ->orderBy($field, $sort)
             ->paginate(limit());
     }
