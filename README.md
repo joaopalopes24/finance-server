@@ -26,7 +26,7 @@ Laravel Ecosystem:
     -   If using linux: cp .env.example .env
     -   If you are on windows, open the file in a code editor and save it again as .env
 
-- Installing Composer Dependencies using Docker
+-   Installing Composer Dependencies using Docker
 
     ```bash
         docker run --rm \
@@ -37,7 +37,7 @@ Laravel Ecosystem:
             composer install --ignore-platform-reqs
     ```
 
-- You can configure a shell alias
+-   You can configure a shell alias
 
     ```bash
         alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
