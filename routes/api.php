@@ -52,11 +52,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::post('/', AccountPlan\StoreController::class);
 
-        Route::get('/{account_plan}', AccountPlan\ShowController::class);
+        Route::get('/{accountPlan}', AccountPlan\ShowController::class);
 
-        Route::put('/{account_plan}', AccountPlan\UpdateController::class);
+        Route::put('/{accountPlan}', AccountPlan\UpdateController::class);
 
-        Route::delete('/{account_plan}', AccountPlan\DestroyController::class);
+        Route::delete('/{accountPlan}', AccountPlan\DestroyController::class);
     });
 
     /**
@@ -67,11 +67,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::post('/', CostCenter\StoreController::class);
 
-        Route::get('/{cost_center}', CostCenter\ShowController::class);
+        Route::get('/{costCenter}', CostCenter\ShowController::class);
 
-        Route::put('/{cost_center}', CostCenter\UpdateController::class);
+        Route::put('/{costCenter}', CostCenter\UpdateController::class);
 
-        Route::delete('/{cost_center}', CostCenter\DestroyController::class);
+        Route::delete('/{costCenter}', CostCenter\DestroyController::class);
     });
 
     /**

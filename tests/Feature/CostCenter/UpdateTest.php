@@ -45,8 +45,10 @@ test('it should update the new cost center', function () {
 test('it should block the update this cost center with other cost center name', function () {
     $costCenter = CostCenter::factory()->create();
 
+    $costCenter2 = CostCenter::factory()->create();
+
     $response = $this->putJson("/api/cost-centers/{$costCenter->id}", [
-        'name' => $costCenter->name,
+        'name' => $costCenter2->name,
         'status' => $costCenter->status,
     ]);
 

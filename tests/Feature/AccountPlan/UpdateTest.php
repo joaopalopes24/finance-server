@@ -45,8 +45,10 @@ test('it should update the new account plan', function () {
 test('it should block the update this account plan with other account plan name', function () {
     $accountPlan = AccountPlan::factory()->create();
 
+    $accountPlan2 = AccountPlan::factory()->create();
+
     $response = $this->putJson("/api/account-plans/{$accountPlan->id}", [
-        'name' => $accountPlan->name,
+        'name' => $accountPlan2->name,
         'status' => $accountPlan->status,
     ]);
 

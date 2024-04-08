@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\CostCenter;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CostCenter\IndexRequest;
 use App\Http\Resources\CostCenter\IndexResource;
 use App\Models\CostCenter;
 use Illuminate\Http\JsonResponse;
-use Spatie\QueryBuilder\QueryBuilder;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class IndexController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(): JsonResponse
+    public function __invoke(IndexRequest $request): JsonResponse
     {
-        $costCenters = $this->getCostCenters();
+        $costCenters = $this->getCostCenters($request);
 
         return IndexResource::collection($costCenters)->response();
     }
@@ -23,11 +24,13 @@ class IndexController extends Controller
     /**
      * Get the cost centers.
      */
-    private function getCostCenters()
+    private function getCostCenters(IndexRequest $request): LengthAwarePaginator
     {
-        return QueryBuilder::for(CostCenter::class)
-            ->allowedFilters(['name', 'code'])
-            ->allowedSorts(['name', 'code'])
+        [$sort, $field, $search] = $request->values();
+
+        return CostCenter::query()
+            ->search($search)
+            ->orderBy($field, $sort)
             ->paginate(limit());
     }
 }
