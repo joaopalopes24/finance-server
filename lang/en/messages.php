@@ -53,6 +53,12 @@ return [
     ],
 
     'two_factor' => [
+        'qr_code' => 'Two factor QR code has been generated.',
+
+        'secret_key' => 'Two factor secret key has been retrieved.',
+
+        'recovery_codes' => 'Two factor recovery codes have been retrieved.',
+
         'invalid_code' => 'The two factor code is invalid.',
 
         'enabled' => 'Two factor authentication has been enabled.',

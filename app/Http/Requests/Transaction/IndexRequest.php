@@ -47,9 +47,9 @@ class IndexRequest extends FormRequest
     {
         $search = $this->input('search');
 
-        $sort = $this->input('sort', 'desc');
+        $sort = $this->input('sort') ?? 'desc';
 
-        $field = $this->input('field', 'created_at');
+        $field = $this->input('field') ?? 'created_at';
 
         return [$sort, $field, $search];
     }

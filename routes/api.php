@@ -10,8 +10,6 @@ use App\Http\Controllers\Transaction;
 use App\Http\Controllers\TwoFactor;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', Dashboard\IndexController::class);
-
 Route::middleware('auth:sanctum')->group(function () {
     /**
      * Me Routes
@@ -21,7 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
     /**
      * Dashboard Routes
      */
-    // Route::get('/dashboard', Dashboard\IndexController::class);
+    Route::get('/dashboard', Dashboard\IndexController::class);
 
     /**
      * Profile
